@@ -76,7 +76,7 @@ function main(){
 
 			var map = met_map(map_main.node());
 
-			map.responsive().states();
+			map.responsive().states("#fffff4");
 			map.store(data, "all_data");
 			map.data(data, "fips");
 

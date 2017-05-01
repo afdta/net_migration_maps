@@ -1271,13 +1271,22 @@ function met_map(container){
     return map;
   };
 
-  map.states = map.state = function(){
+  var state_aes = {
+  	fill:"none"
+  };
+
+  map.states = map.state = function(state_col){
+  	
+  	if(arguments.length > 0){
+  		state_aes.fill = state_col;
+  	}
+
     if(!proj.init){proj.dims();}
     var states = map.sel.g_state.selectAll("path").data(map.json.features);
 	states.exit().remove();
     states.enter().append("path").classed("state",true)
                                  .merge(states)
-                                 .attr("fill","none")
+                                 .attr("fill", state_aes.fill)
                                  .attr("stroke","#999999")
                                  .attr("stroke-width","0.5px")
                                  .attr("d", proj.path)
@@ -1373,7 +1382,7 @@ function main(){
 
 			var map = met_map(map_main.node());
 
-			map.responsive().states();
+			map.responsive().states("#fffff4");
 			map.store(data, "all_data");
 			map.data(data, "fips");
 
